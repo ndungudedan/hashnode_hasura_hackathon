@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hashnode_hasura_hackathon/app/app.locator.dart';
 import 'package:hashnode_hasura_hackathon/app/app.router.dart';
+import 'package:hashnode_hasura_hackathon/constants/themes.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 
@@ -22,10 +23,10 @@ class HasuraAirBnB extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ThemeBuilder(
-        //themes: getThemes(),
+        themes: getThemes(),
         builder: (context, regularTheme, darkTheme, themeMode) => MaterialApp(
               debugShowCheckedModeBanner: false,
-              title: 'Zuri Chat',
+              title: 'Hasura AirBnB',
               builder: (context, child) => Navigator(
                 key: windowTitleNavigationKey,
                 onGenerateRoute: (settings) => MaterialPageRoute(

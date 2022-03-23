@@ -66,8 +66,8 @@ class SignUpViewModel extends FormViewModel {
   /// This function is called to perform the user signup and set the view state to busy
   /// while performing the task. This is accomplished by using the [runBusyFuture]
   Future<void> signUp() async {
-    await runBusyFuture(
-        performSignUp(emailValue!, passwordValue!, fullNameValue!));
+   /*  await runBusyFuture(
+        performSignUp(emailValue!, passwordValue!, fullNameValue!)); */
   }
 
   /// This function validate all the field in  the signup screen and create the acount if

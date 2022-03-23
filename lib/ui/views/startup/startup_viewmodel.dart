@@ -19,7 +19,7 @@ class StartUpViewModel extends BaseViewModel {
   void initialise() async {
     await Future.delayed(Duration(milliseconds: 10));
     try {
-      final auth = await Auth.fromJson(jsonDecode(
+      final auth = Auth.fromJson(jsonDecode(
           _localStorageService.getFromDisk(localAuthResponseKey).toString()));
       if (auth.user.toString().isNotEmpty) {
         return;
