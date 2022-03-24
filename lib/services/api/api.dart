@@ -11,8 +11,8 @@ abstract class Api {
   /// post request;
   ///
   ///
-  /// parameters; [String] email and [String] password
-  Future<dynamic> login({required String email, required String password});
+  /// parameters; [String] email
+  Future<dynamic> login({required String email});
 
   /// returns [Future]<[void]>, Sign up user.
   ///
@@ -25,7 +25,4 @@ abstract class Api {
       required String email,
       required String fName,
       required String lName});
-
-  /// Sign user out and distroy user token and distroy user token
-  Future<void> signOut(String token);
 }

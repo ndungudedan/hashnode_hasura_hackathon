@@ -2,6 +2,8 @@ import 'package:hashnode_hasura_hackathon/app/app.locator.dart';
 import 'package:hashnode_hasura_hackathon/app/app.logger.dart';
 import 'package:hashnode_hasura_hackathon/app/app.router.dart';
 import 'package:hashnode_hasura_hackathon/constants/app_strings.dart';
+import 'package:hashnode_hasura_hackathon/ui/views/auth/login/login_view.form.dart';
+import 'package:hashnode_hasura_hackathon/ui/views/auth/sign_up/sign_up_view.form.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -28,13 +30,6 @@ class LoginViewModel extends FormViewModel {
     await Future.delayed(Duration(milliseconds: 1));
   }
 
-  /// This function update the value of [_passwordVisibility] when the action is
-  /// triggered by user using the eyes button on the view
-  void setPasswordVisibility() {
-    _passwordVisibility = !_passwordVisibility;
-    notifyListeners();
-  }
-
   /// Navigate user to signup screen using [NavigationService]
   void goToSignUp() {
     _navigationService.navigateTo(Routes.signUpView);
@@ -42,15 +37,15 @@ class LoginViewModel extends FormViewModel {
 
   /// This funtion perform the login action by calling runBusyFunction to set the
   /// view to busy set.
-  Future<void> login(String email, String password) async {
-    await runBusyFuture(performLogin(email, password));
+  Future<void> login() async {
+    await runBusyFuture(performLogin());
   }
 
   /// This function authentiate user and redirect them to the choose workspace view
 
-  Future<void> performLogin(String email, String password) async {
+  Future<void> performLogin() async {
     try {
-      await _auth.loginUser(email: email.trim(), password: password);
+      await _auth.loginUser(email:PhoneValueKey);
     } catch (e) {
       if (e.toString().contains('40')) {
         throw Failure(InvalidErrorMessage);

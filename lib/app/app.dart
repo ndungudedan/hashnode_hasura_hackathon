@@ -14,7 +14,7 @@ import '../services/startup_service.dart';
 import '../services/user_service.dart';
 
 /// Use this to switch to mock data or live data
-const useFakeApiService = true;
+const useFakeApiService = false;
 
 @StackedApp(
   routes: [

@@ -25,9 +25,9 @@ class AuthService {
 
   /// This method authenticate user and save the the response to local storage.
   Future<void> loginUser(
-      {required String email, required String password}) async {
+      {required String email}) async {
     final response =
-        await _zuriApiService.login(email: email, password: password);
+        await _zuriApiService.login(email: email);
     log.i(response);
     auth = AuthResponse.fromJson(response).data!;
     _localStorageService.saveToDisk(localAuthResponseKey, jsonEncode(auth));
@@ -49,7 +49,6 @@ class AuthService {
   /// The function is used to perform the logout action and it does so by destroying the user
   /// token and clearing the user auth response and selected organization from local storage
   void logOut(String token) async {
-    _zuriApiService.signOut(token);
     _localStorageService.removeFromDisk(localAuthResponseKey);
     _localStorageService.removeFromDisk(selectedOrgKey);
   }

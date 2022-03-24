@@ -5,9 +5,6 @@ import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:hashnode_hasura_hackathon/app/app.logger.dart';
 import 'package:hashnode_hasura_hackathon/constants/app_api_constants.dart';
-import 'package:hashnode_hasura_hackathon/model/app_models.dart';
-import 'package:intl/intl.dart';
-
 import 'api.dart';
 
 class ApiService implements Api {
@@ -156,24 +153,18 @@ class ApiService implements Api {
 
   /* AUTH SERVICE */
 
-  Future<void> signOut(String token) async {
-    final response = await _post(
-      signOutUri,
-      body: {},
-      headers: {'Authorization': 'Bearer $token'},
-    );
-    log.i(response);
-  }
 
   @override
   Future<dynamic> login(
-      {required String email, required String password}) async {
+      {required String email}) async {
     return await _post(
-      signInUri,
+      loginUri,
       body: {
-        'email': email,
-        'password': password,
+        'email_address': email,
       },
+      headers: {
+        'X-Hasura-Role':'public'
+      }
     );
   }
 
