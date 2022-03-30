@@ -1,16 +1,12 @@
 # hashnode_hasura_hackathon
 
-A new Flutter project.
+This is a submission for the hasura hashnode hackathon.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. Clone the repository.
+2. Create a .env file on the root folder.
+3. Add the following line of code
+GOOGLE_API_KEY='Your Google maps api key'
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [Get a Google Maps Api Key from here](https://cloud.google.com/maps-platform/)

@@ -1,16 +1,21 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hashnode_hasura_hackathon/app/app.locator.dart';
 import 'package:hashnode_hasura_hackathon/app/app.router.dart';
 import 'package:hashnode_hasura_hackathon/constants/themes.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 
+DotEnv dotEnv = DotEnv();
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await setupLocator();
   await ThemeManager.initialise();
-
+  await Firebase.initializeApp();
+  await dotEnv.load();
   runApp(HasuraAirBnB());
 }
 

@@ -3,7 +3,6 @@ import 'package:hashnode_hasura_hackathon/app/app.logger.dart';
 import 'package:hashnode_hasura_hackathon/app/app.router.dart';
 import 'package:hashnode_hasura_hackathon/constants/app_strings.dart';
 import 'package:hashnode_hasura_hackathon/ui/views/auth/login/login_view.form.dart';
-import 'package:hashnode_hasura_hackathon/ui/views/auth/sign_up/sign_up_view.form.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -15,11 +14,9 @@ class LoginViewModel extends FormViewModel {
   final _navigationService = locator<NavigationService>();
   final _auth = locator<AuthService>();
 
-  /// The varible when set to true is use to obscure the password field and when set to false
-  /// make the password text visible.
-  bool _passwordVisibility = true;
-
-  bool get passwordVisible => _passwordVisibility;
+  String? countryCode = '+254';
+  String? phone, email;
+  bool phoneLogin = true;
 
   /// This method is called in the view on model ready so the function is called
   /// as soon as the view is coming up. The method called [WindowsTitleBarService]
@@ -37,20 +34,29 @@ class LoginViewModel extends FormViewModel {
 
   /// This funtion perform the login action by calling runBusyFunction to set the
   /// view to busy set.
-  Future<void> login() async {
+  Future<void> phoneAuthLogin() async {
+    phoneLogin = true;
+    phone = '$countryCode$phoneValue'.replaceAll(RegExp(r'[^\w\s]+'), '');
     await runBusyFuture(performLogin());
   }
 
-  /// This function authentiate user and redirect them to the choose workspace view
+  Future<void> googleAuthLogin() async {
+    phoneLogin = false;
+    email = await _auth.googleLogin();
+    if (email != null) {
+      await runBusyFuture(performLogin());
+    } else {
+      throw Failure(InvalidErrorMessage);
+    }
+  }
 
   Future<void> performLogin() async {
-    try {
-      await _auth.loginUser(email:PhoneValueKey);
-    } catch (e) {
-      if (e.toString().contains('40')) {
-        throw Failure(InvalidErrorMessage);
-      }
-      throw Failure(AuthErrorMessage);
+    bool foundUser = await _auth.loginUser(phone: phone, email: email);
+    if (foundUser) {
+      _navigationService.pushNamedAndRemoveUntil(Routes.dashBoardView);
+    } else {
+      _navigationService.navigateTo(Routes.signUpView,
+          arguments: SignUpViewArguments(authEmail: email, authPhone: phone));
     }
   }
 

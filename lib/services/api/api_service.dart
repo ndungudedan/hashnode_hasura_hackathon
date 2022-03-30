@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:core';
 import 'dart:io';
 
@@ -5,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:hashnode_hasura_hackathon/app/app.logger.dart';
 import 'package:hashnode_hasura_hackathon/constants/app_api_constants.dart';
+import 'package:hashnode_hasura_hackathon/model/app_models.dart';
 import 'api.dart';
 
 class ApiService implements Api {
@@ -57,7 +59,7 @@ class ApiService implements Api {
         options: cacheOptions.toOptions()..headers = headers,
       );
 
-      //log.i('Response from $uri \n${response.data}');
+      log.i('Response from $uri \n${response.data}');
       return response.data;
     } on DioError catch (error) {
       log.e(error.response!.data);
@@ -70,15 +72,16 @@ class ApiService implements Api {
 
   Future<dynamic> _post(
     Uri uri, {
-    required Map<String, dynamic> body,
+    required String body,
     Map<String, String>? headers,
   }) async {
     log.i('Making request to $uri');
+    log.i('request data $body');
     try {
       final response = await dio.post(uri.toString(),
           data: body, options: Options(headers: headers));
 
-      //log.i('Response from $uri \n${response.data}');
+      log.i('Response from $uri \n${response.data}');
       return response.data;
     } on DioError catch (error) {
       log.e(error.response!.statusCode);
@@ -153,35 +156,65 @@ class ApiService implements Api {
 
   /* AUTH SERVICE */
 
-
   @override
-  Future<dynamic> login(
-      {required String email}) async {
-    return await _post(
-      loginUri,
-      body: {
-        'email_address': email,
-      },
-      headers: {
-        'X-Hasura-Role':'public'
-      }
-    );
+  Future<dynamic> login({required String? phone,required String? email}) async {
+    log.i('$phone $email');
+    return await _post(loginUri, body:jsonEncode({
+      'email':email ?? '',
+      'phone':phone?? 0
+    }) , headers: {'X-Hasura-Role': 'public'});
   }
 
   @override
-  Future<void> signup(
-      {required String password,
+  Future<dynamic> signup(
+      {required String phone,
       required String email,
       required String fName,
       required String lName}) async {
-    await _post(
-      signupUri,
-      body: {
-        'email': email,
-        'password': password,
-        'last_name': lName,
-        'first_name': fName
-      },
-    );
+        
+   return await _post(
+    email.isNotEmpty ? signupUriEmail : signupUriPhone,
+      body:jsonEncode(
+     email.isNotEmpty ?   {
+      'email':email,
+      'first_name':fName,
+      'last_name':lName
+    } :  {
+      'phone':phone,
+      'first_name':fName,
+      'last_name':lName
+    }
+    ) , headers: {'X-Hasura-Role': 'public'});
+  }
+
+  @override
+  Future addSpace({required ListedSpace space}) async {
+    return await _post(
+    newSpaceUri,
+      body:jsonEncode(space.toJson()) , headers: {'X-Hasura-Role': 'user'});
+  }
+
+  @override
+  Future exploreSpaces() async {
+    return await _post(
+      exploreSpacesUri,
+      body:'' , headers: {'X-Hasura-Role': 'user'});
+  }
+
+  @override
+  Future checkSpace({required spaceId, required date}) async {
+    return await _post(
+      checkSpacesUri,
+      body:jsonEncode({
+      'space_id':spaceId,
+      'date':date,
+    }), headers: {'X-Hasura-Role': 'user'});
+  }
+
+  @override
+  Future bookSpace({required BookSpace space}) async {
+    return await _post(
+    bookSpacesUri,
+      body:jsonEncode(space.toJson()) , headers: {'X-Hasura-Role': 'user'});
   }
 }

@@ -22,7 +22,7 @@ class StartUpViewModel extends BaseViewModel {
       final auth = Auth.fromJson(jsonDecode(
           _localStorageService.getFromDisk(localAuthResponseKey).toString()));
       if (auth.user.toString().isNotEmpty) {
-        return;
+         _navigationService.navigateTo(Routes.loginView);//cahnge this
       }
       _navigationService.navigateTo(Routes.loginView);
     } catch (e) {

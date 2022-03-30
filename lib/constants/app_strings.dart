@@ -116,3 +116,4 @@ const String countryHint = 'Country/Region';
 const String continueText = 'Continue';
 const String or = 'or';
 const String continueWithGoogle = 'Continue with Google';
+const String agreeAndContinue = 'Agree and continue';

@@ -12,7 +12,7 @@ abstract class Api {
   ///
   ///
   /// parameters; [String] email
-  Future<dynamic> login({required String email});
+  Future<dynamic> login({required String? phone, required String? email});
 
   /// returns [Future]<[void]>, Sign up user.
   ///
@@ -20,9 +20,19 @@ abstract class Api {
   ///
   ///
   /// parameters; [String] email and [String] password
-  Future<void> signup(
-      {required String password,
+  Future<dynamic> signup(
+      {required String phone,
       required String email,
       required String fName,
       required String lName});
+
+  Future<dynamic> addSpace({required ListedSpace space});
+
+    Future<dynamic> bookSpace({required BookSpace space});
+
+
+  Future<dynamic> exploreSpaces();
+
+  Future<dynamic> checkSpace({required var spaceId,required var date});
+
 }

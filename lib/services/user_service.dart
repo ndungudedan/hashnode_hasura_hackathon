@@ -21,13 +21,4 @@ class UserService {
     final auth = _localStorageService.getFromDisk(localAuthResponseKey);
     return Auth.fromJson(jsonDecode(auth as String));
   }
-
-  Organization get organization {
-    final organization = _localStorageService.getFromDisk(localAuthResponseKey);
-    return Organization.fromJson(jsonDecode(organization as String));
-  }
-
-  String getUserId() {
-    return _localStorageService.getFromDisk(userIdKey) as String;
-  }
 }

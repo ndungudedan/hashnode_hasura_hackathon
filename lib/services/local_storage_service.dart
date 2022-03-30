@@ -80,19 +80,4 @@ class LocalStorageService {
     //print('(TRACE) LocalStorageService:_getFromDisk. key: $key value: $value');
     return value;
   }
-
-  OrganizationResponse? get organizationResponse {
-    var organizationResponseJson = getFromDisk(organizationResponseKey);
-    if (organizationResponseJson == null) {
-      return null;
-    }
-    return OrganizationResponse.fromJson(
-        jsonDecode(organizationResponseJson.toString()));
-  }
-
-  //OrgResponse setter
-  void setOrganizationResponse(
-          OrganizationResponse? organizationResponseToSave) =>
-      saveToDisk(organizationResponseKey,
-          jsonEncode(organizationResponseToSave.toString()));
 }

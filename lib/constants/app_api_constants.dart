@@ -9,7 +9,14 @@ Uri baseUri = Uri(scheme: scheme, host: host, path: '/');
 
 // Auth Endpoints
 
-Uri signupUri = Uri(scheme: scheme, host: host, path: '/api/rest/register-app-user');
+Uri signupUriEmail = Uri(scheme: scheme, host: host, path: '/api/rest/register-app-user-email');
+Uri signupUriPhone = Uri(scheme: scheme, host: host, path: '/api/rest/register-app-user-phone');
 
 Uri loginUri=
     Uri(scheme: scheme, host: host, path: '/api/rest/login-app-user');
+
+  Uri exploreSpacesUri = Uri(scheme: scheme, host: host, path: '/api/rest/explore-spaces');
+Uri checkSpacesUri = Uri(scheme: scheme, host: host, path: '/api/rest/check-space');
+Uri bookSpacesUri = Uri(scheme: scheme, host: host, path: '/api/rest/book-space');
+Uri newSpaceUri=
+    Uri(scheme: scheme, host: host, path: '/api/rest/new-space');

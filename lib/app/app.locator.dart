@@ -11,6 +11,7 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 
+import '../services/add_space_service.dart';
 import '../services/api/api.dart';
 import '../services/api/api_service.dart';
 import '../services/auth_service.dart';
@@ -33,6 +34,7 @@ Future setupLocator(
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => AuthService());
   locator.registerLazySingleton(() => StartupService());
+  locator.registerLazySingleton(() => AddSpaceService());
   locator.registerLazySingleton<Api>(() => ApiService());
   locator.registerLazySingleton(() => ThemeService.getInstance());
   locator.registerLazySingleton(() => UserService());
