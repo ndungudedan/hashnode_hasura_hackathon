@@ -15,6 +15,7 @@ GOOGLE_API_KEY='Your Google maps api key'
 - [Get a Google Maps Api Key from here](https://cloud.google.com/maps-platform/)
 
 
-![screenshot](pic.png)
-![screenshot1](pic2.png)
-![screenshot2](pic3.png)
+![screenshot]<img src="pic.png" width="400" height="790">
+![screenshot1]<img src="pic2.png" width="400" height="790">
+![screenshot2]<img src="pic3.png" width="400" height="790">
+
