@@ -14,6 +14,7 @@ class ExploreView extends HookWidget {
     return ViewModelBuilder<ExploreViewModel>.reactive(
       onModelReady: (model) {
         model.init();
+        precacheImage(const AssetImage(coolHouse),context);
       },
       builder: (context, model, child) => Scaffold(
         backgroundColor: Colors.white,

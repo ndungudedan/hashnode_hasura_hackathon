@@ -115,7 +115,7 @@ class ExploreSpace with _$ExploreSpace {
 class CheckSpaceResponse with _$CheckSpaceResponse {
   factory CheckSpaceResponse({
     @JsonKey(name:'spaces') @Default([]) List<dynamic> spaces,
-     @JsonKey(name:'bookings') @Default([]) List<dynamic> bookings,
+     @JsonKey(name:'space_bookings') @Default([]) List<dynamic> bookings,
   }) = _CheckSpaceResponse;
 
   factory CheckSpaceResponse.fromJson(Map<String, dynamic> json) =>
@@ -125,12 +125,10 @@ class CheckSpaceResponse with _$CheckSpaceResponse {
 @freezed
 class BookSpace with _$BookSpace {
   factory BookSpace({
-    int? id,
     @Default('') @JsonKey(name:'cost') String cost,
     @Default(0) @JsonKey(name:'space_id') int spaceId,
      @Default('') @JsonKey(name:'start_stay') String startStay,
     @Default('') @JsonKey(name:'end_stay') String endStay,
-    @Default(false) bool paid,
     @Default(0) @JsonKey(name: 'app_user_id') int appUserId,
   }) = _BookSpace;
 

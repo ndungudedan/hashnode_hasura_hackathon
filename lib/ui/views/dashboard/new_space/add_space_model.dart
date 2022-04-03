@@ -23,7 +23,9 @@ class AddNewSpaceViewModel extends FormViewModel {
 
   final _navigationService = locator<NavigationService>();
   auth.FirebaseAuth mAuth = auth.FirebaseAuth.instance;
+    final _snackbarService = locator<SnackbarService>();
   final _addSpaceService = locator<AddSpaceService>();
+  final _dialogService = locator<DialogService>();
   final _localStorageService = locator<LocalStorageService>();
   final TextEditingController costController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
@@ -43,6 +45,7 @@ class AddNewSpaceViewModel extends FormViewModel {
   /// The function is used to state the state of the title bar as well a the title of the
   /// title bar.
   void init() async {
+    String _nextRoute = AddNewSpaceViewRoutes.nameFormWidget;
     photos = [];
     formTitle = 'What kind of place will you host?';
     address = 'Enter Your Address';
@@ -53,11 +56,13 @@ class AddNewSpaceViewModel extends FormViewModel {
   void initNameForm() {
     formTitle = 'What kind of place will you host?';
     _nextRoute = AddNewSpaceViewRoutes.descriptionFormWidget;
+    notifyListeners();
   }
 
   void initDescriptionForm() {
     formTitle = 'What kind of place will you host?';
     _nextRoute = AddNewSpaceViewRoutes.locationFormWidget;
+    notifyListeners();
   }
 
   void initLocationForm() {
@@ -67,21 +72,25 @@ class AddNewSpaceViewModel extends FormViewModel {
     cameraPosition = CameraPosition(
         zoom: 17,
         target: LatLng(myPosition?.latitude ?? 0, myPosition?.longitude ?? 0));
+    notifyListeners();
   }
 
   void initPhotosForm() {
     formTitle = 'Lets see some photos';
     _nextRoute = AddNewSpaceViewRoutes.costFormWidget;
+    notifyListeners();
   }
 
   void initCostForm() {
     formTitle = 'How much will it cost a night?';
     submit = true;
     _nextRoute = AddNewSpaceViewRoutes.submitFormWidget;
+    notifyListeners();
   }
 
   void initSubmitForm() {
     _nextRoute = AddNewSpaceViewRoutes.descriptionFormWidget;
+    notifyListeners();
   }
 
   void modalNaviagtion() {
@@ -90,6 +99,7 @@ class AddNewSpaceViewModel extends FormViewModel {
 
   void navigateBack({int? id}) {
     _navigationService.back(id: id);
+    notifyListeners();
   }
 
   Future<void> pickPhotos() async {
@@ -196,7 +206,14 @@ class AddNewSpaceViewModel extends FormViewModel {
       if (res) {
         _navigationService.pushNamedAndRemoveUntil(Routes.dashBoardView);
       } else {
-        print('failed');
+       _snackbarService.showSnackbar(
+  message: 'Could not book space',
+  title: 'Operation failed',
+  duration: Duration(seconds: 3),
+  onTap: (_) {
+    print('snackbar tapped');
+  },
+);
       }
     } catch (e) {
       log.e(e);

@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hashnode_hasura_hackathon/app/app.locator.dart';
 import 'package:hashnode_hasura_hackathon/app/app.router.dart';
 import 'package:hashnode_hasura_hackathon/constants/themes.dart';
+import 'package:hashnode_hasura_hackathon/ui/shared/const_app_colors.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
 
@@ -16,6 +17,16 @@ Future<void> main() async {
   await ThemeManager.initialise();
   await Firebase.initializeApp();
   await dotEnv.load();
+      final _snackbarService = locator<SnackbarService>();
+
+  // Registers a config to be used when calling showSnackbar
+  _snackbarService.registerSnackbarConfig(SnackbarConfig(
+    backgroundColor: kcPrimaryColor,
+    textColor: Colors.white,
+    titleColor: Colors.white,
+    messageColor: Colors.white,
+    mainButtonTextColor: Colors.black,
+  ));
   runApp(HasuraAirBnB());
 }
 

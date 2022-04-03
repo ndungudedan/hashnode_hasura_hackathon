@@ -1946,7 +1946,7 @@ class _$CheckSpaceResponseTearOff {
 
   _CheckSpaceResponse call(
       {@JsonKey(name: 'spaces') List<dynamic> spaces = const [],
-      @JsonKey(name: 'bookings') List<dynamic> bookings = const []}) {
+      @JsonKey(name: 'space_bookings') List<dynamic> bookings = const []}) {
     return _CheckSpaceResponse(
       spaces: spaces,
       bookings: bookings,
@@ -1965,7 +1965,7 @@ const $CheckSpaceResponse = _$CheckSpaceResponseTearOff();
 mixin _$CheckSpaceResponse {
   @JsonKey(name: 'spaces')
   List<dynamic> get spaces => throw _privateConstructorUsedError;
-  @JsonKey(name: 'bookings')
+  @JsonKey(name: 'space_bookings')
   List<dynamic> get bookings => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1981,7 +1981,7 @@ abstract class $CheckSpaceResponseCopyWith<$Res> {
       _$CheckSpaceResponseCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'spaces') List<dynamic> spaces,
-      @JsonKey(name: 'bookings') List<dynamic> bookings});
+      @JsonKey(name: 'space_bookings') List<dynamic> bookings});
 }
 
 /// @nodoc
@@ -2020,7 +2020,7 @@ abstract class _$CheckSpaceResponseCopyWith<$Res>
   @override
   $Res call(
       {@JsonKey(name: 'spaces') List<dynamic> spaces,
-      @JsonKey(name: 'bookings') List<dynamic> bookings});
+      @JsonKey(name: 'space_bookings') List<dynamic> bookings});
 }
 
 /// @nodoc
@@ -2057,7 +2057,7 @@ class __$CheckSpaceResponseCopyWithImpl<$Res>
 class _$_CheckSpaceResponse implements _CheckSpaceResponse {
   _$_CheckSpaceResponse(
       {@JsonKey(name: 'spaces') this.spaces = const [],
-      @JsonKey(name: 'bookings') this.bookings = const []});
+      @JsonKey(name: 'space_bookings') this.bookings = const []});
 
   factory _$_CheckSpaceResponse.fromJson(Map<String, dynamic> json) =>
       _$$_CheckSpaceResponseFromJson(json);
@@ -2066,7 +2066,7 @@ class _$_CheckSpaceResponse implements _CheckSpaceResponse {
   @JsonKey(name: 'spaces')
   final List<dynamic> spaces;
   @override
-  @JsonKey(name: 'bookings')
+  @JsonKey(name: 'space_bookings')
   final List<dynamic> bookings;
 
   @override
@@ -2103,7 +2103,7 @@ class _$_CheckSpaceResponse implements _CheckSpaceResponse {
 abstract class _CheckSpaceResponse implements CheckSpaceResponse {
   factory _CheckSpaceResponse(
           {@JsonKey(name: 'spaces') List<dynamic> spaces,
-          @JsonKey(name: 'bookings') List<dynamic> bookings}) =
+          @JsonKey(name: 'space_bookings') List<dynamic> bookings}) =
       _$_CheckSpaceResponse;
 
   factory _CheckSpaceResponse.fromJson(Map<String, dynamic> json) =
@@ -2113,7 +2113,7 @@ abstract class _CheckSpaceResponse implements CheckSpaceResponse {
   @JsonKey(name: 'spaces')
   List<dynamic> get spaces;
   @override
-  @JsonKey(name: 'bookings')
+  @JsonKey(name: 'space_bookings')
   List<dynamic> get bookings;
   @override
   @JsonKey(ignore: true)
@@ -2130,20 +2130,16 @@ class _$BookSpaceTearOff {
   const _$BookSpaceTearOff();
 
   _BookSpace call(
-      {int? id,
-      @JsonKey(name: 'cost') String cost = '',
+      {@JsonKey(name: 'cost') String cost = '',
       @JsonKey(name: 'space_id') int spaceId = 0,
       @JsonKey(name: 'start_stay') String startStay = '',
       @JsonKey(name: 'end_stay') String endStay = '',
-      bool paid = false,
       @JsonKey(name: 'app_user_id') int appUserId = 0}) {
     return _BookSpace(
-      id: id,
       cost: cost,
       spaceId: spaceId,
       startStay: startStay,
       endStay: endStay,
-      paid: paid,
       appUserId: appUserId,
     );
   }
@@ -2158,7 +2154,6 @@ const $BookSpace = _$BookSpaceTearOff();
 
 /// @nodoc
 mixin _$BookSpace {
-  int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'cost')
   String get cost => throw _privateConstructorUsedError;
   @JsonKey(name: 'space_id')
@@ -2167,7 +2162,6 @@ mixin _$BookSpace {
   String get startStay => throw _privateConstructorUsedError;
   @JsonKey(name: 'end_stay')
   String get endStay => throw _privateConstructorUsedError;
-  bool get paid => throw _privateConstructorUsedError;
   @JsonKey(name: 'app_user_id')
   int get appUserId => throw _privateConstructorUsedError;
 
@@ -2182,12 +2176,10 @@ abstract class $BookSpaceCopyWith<$Res> {
   factory $BookSpaceCopyWith(BookSpace value, $Res Function(BookSpace) then) =
       _$BookSpaceCopyWithImpl<$Res>;
   $Res call(
-      {int? id,
-      @JsonKey(name: 'cost') String cost,
+      {@JsonKey(name: 'cost') String cost,
       @JsonKey(name: 'space_id') int spaceId,
       @JsonKey(name: 'start_stay') String startStay,
       @JsonKey(name: 'end_stay') String endStay,
-      bool paid,
       @JsonKey(name: 'app_user_id') int appUserId});
 }
 
@@ -2201,19 +2193,13 @@ class _$BookSpaceCopyWithImpl<$Res> implements $BookSpaceCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? id = freezed,
     Object? cost = freezed,
     Object? spaceId = freezed,
     Object? startStay = freezed,
     Object? endStay = freezed,
-    Object? paid = freezed,
     Object? appUserId = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
       cost: cost == freezed
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
@@ -2230,10 +2216,6 @@ class _$BookSpaceCopyWithImpl<$Res> implements $BookSpaceCopyWith<$Res> {
           ? _value.endStay
           : endStay // ignore: cast_nullable_to_non_nullable
               as String,
-      paid: paid == freezed
-          ? _value.paid
-          : paid // ignore: cast_nullable_to_non_nullable
-              as bool,
       appUserId: appUserId == freezed
           ? _value.appUserId
           : appUserId // ignore: cast_nullable_to_non_nullable
@@ -2249,12 +2231,10 @@ abstract class _$BookSpaceCopyWith<$Res> implements $BookSpaceCopyWith<$Res> {
       __$BookSpaceCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int? id,
-      @JsonKey(name: 'cost') String cost,
+      {@JsonKey(name: 'cost') String cost,
       @JsonKey(name: 'space_id') int spaceId,
       @JsonKey(name: 'start_stay') String startStay,
       @JsonKey(name: 'end_stay') String endStay,
-      bool paid,
       @JsonKey(name: 'app_user_id') int appUserId});
 }
 
@@ -2269,19 +2249,13 @@ class __$BookSpaceCopyWithImpl<$Res> extends _$BookSpaceCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? id = freezed,
     Object? cost = freezed,
     Object? spaceId = freezed,
     Object? startStay = freezed,
     Object? endStay = freezed,
-    Object? paid = freezed,
     Object? appUserId = freezed,
   }) {
     return _then(_BookSpace(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
       cost: cost == freezed
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
@@ -2298,10 +2272,6 @@ class __$BookSpaceCopyWithImpl<$Res> extends _$BookSpaceCopyWithImpl<$Res>
           ? _value.endStay
           : endStay // ignore: cast_nullable_to_non_nullable
               as String,
-      paid: paid == freezed
-          ? _value.paid
-          : paid // ignore: cast_nullable_to_non_nullable
-              as bool,
       appUserId: appUserId == freezed
           ? _value.appUserId
           : appUserId // ignore: cast_nullable_to_non_nullable
@@ -2314,19 +2284,15 @@ class __$BookSpaceCopyWithImpl<$Res> extends _$BookSpaceCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_BookSpace implements _BookSpace {
   _$_BookSpace(
-      {this.id,
-      @JsonKey(name: 'cost') this.cost = '',
+      {@JsonKey(name: 'cost') this.cost = '',
       @JsonKey(name: 'space_id') this.spaceId = 0,
       @JsonKey(name: 'start_stay') this.startStay = '',
       @JsonKey(name: 'end_stay') this.endStay = '',
-      this.paid = false,
       @JsonKey(name: 'app_user_id') this.appUserId = 0});
 
   factory _$_BookSpace.fromJson(Map<String, dynamic> json) =>
       _$$_BookSpaceFromJson(json);
 
-  @override
-  final int? id;
   @override
   @JsonKey(name: 'cost')
   final String cost;
@@ -2339,16 +2305,13 @@ class _$_BookSpace implements _BookSpace {
   @override
   @JsonKey(name: 'end_stay')
   final String endStay;
-  @JsonKey()
-  @override
-  final bool paid;
   @override
   @JsonKey(name: 'app_user_id')
   final int appUserId;
 
   @override
   String toString() {
-    return 'BookSpace(id: $id, cost: $cost, spaceId: $spaceId, startStay: $startStay, endStay: $endStay, paid: $paid, appUserId: $appUserId)';
+    return 'BookSpace(cost: $cost, spaceId: $spaceId, startStay: $startStay, endStay: $endStay, appUserId: $appUserId)';
   }
 
   @override
@@ -2356,24 +2319,20 @@ class _$_BookSpace implements _BookSpace {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _BookSpace &&
-            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.cost, cost) &&
             const DeepCollectionEquality().equals(other.spaceId, spaceId) &&
             const DeepCollectionEquality().equals(other.startStay, startStay) &&
             const DeepCollectionEquality().equals(other.endStay, endStay) &&
-            const DeepCollectionEquality().equals(other.paid, paid) &&
             const DeepCollectionEquality().equals(other.appUserId, appUserId));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(cost),
       const DeepCollectionEquality().hash(spaceId),
       const DeepCollectionEquality().hash(startStay),
       const DeepCollectionEquality().hash(endStay),
-      const DeepCollectionEquality().hash(paid),
       const DeepCollectionEquality().hash(appUserId));
 
   @JsonKey(ignore: true)
@@ -2389,19 +2348,15 @@ class _$_BookSpace implements _BookSpace {
 
 abstract class _BookSpace implements BookSpace {
   factory _BookSpace(
-      {int? id,
-      @JsonKey(name: 'cost') String cost,
+      {@JsonKey(name: 'cost') String cost,
       @JsonKey(name: 'space_id') int spaceId,
       @JsonKey(name: 'start_stay') String startStay,
       @JsonKey(name: 'end_stay') String endStay,
-      bool paid,
       @JsonKey(name: 'app_user_id') int appUserId}) = _$_BookSpace;
 
   factory _BookSpace.fromJson(Map<String, dynamic> json) =
       _$_BookSpace.fromJson;
 
-  @override
-  int? get id;
   @override
   @JsonKey(name: 'cost')
   String get cost;
@@ -2414,8 +2369,6 @@ abstract class _BookSpace implements BookSpace {
   @override
   @JsonKey(name: 'end_stay')
   String get endStay;
-  @override
-  bool get paid;
   @override
   @JsonKey(name: 'app_user_id')
   int get appUserId;

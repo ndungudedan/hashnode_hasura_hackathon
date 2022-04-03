@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_geocoding/google_geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:hashnode_hasura_hackathon/constants/app_assets.dart';
 import 'package:hashnode_hasura_hackathon/model/app_models.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -23,6 +25,7 @@ class ExploreViewModel extends BaseViewModel {
   void init() async {
     await Future.delayed(const Duration(milliseconds: 1));
     initLocation();
+    
   }
 
   void navigateToViewSpace() {

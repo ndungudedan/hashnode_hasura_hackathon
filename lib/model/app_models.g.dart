@@ -158,34 +158,30 @@ _$_CheckSpaceResponse _$$_CheckSpaceResponseFromJson(
         Map<String, dynamic> json) =>
     _$_CheckSpaceResponse(
       spaces: json['spaces'] as List<dynamic>? ?? const [],
-      bookings: json['bookings'] as List<dynamic>? ?? const [],
+      bookings: json['space_bookings'] as List<dynamic>? ?? const [],
     );
 
 Map<String, dynamic> _$$_CheckSpaceResponseToJson(
         _$_CheckSpaceResponse instance) =>
     <String, dynamic>{
       'spaces': instance.spaces,
-      'bookings': instance.bookings,
+      'space_bookings': instance.bookings,
     };
 
 _$_BookSpace _$$_BookSpaceFromJson(Map<String, dynamic> json) => _$_BookSpace(
-      id: json['id'] as int?,
       cost: json['cost'] as String? ?? '',
       spaceId: json['space_id'] as int? ?? 0,
       startStay: json['start_stay'] as String? ?? '',
       endStay: json['end_stay'] as String? ?? '',
-      paid: json['paid'] as bool? ?? false,
       appUserId: json['app_user_id'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$_BookSpaceToJson(_$_BookSpace instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'cost': instance.cost,
       'space_id': instance.spaceId,
       'start_stay': instance.startStay,
       'end_stay': instance.endStay,
-      'paid': instance.paid,
       'app_user_id': instance.appUserId,
     };
 

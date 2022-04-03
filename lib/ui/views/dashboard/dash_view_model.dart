@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:google_geocoding/google_geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hashnode_hasura_hackathon/model/app_models.dart';
 import 'package:stacked/stacked.dart';
@@ -16,9 +15,10 @@ import '../../../services/local_storage_service.dart';
 
 class DashViewModel extends FormViewModel {
   final log = getLogger('DashViewModel');
-
+  final _dialogService = locator<DialogService>();
   final _navigationService = locator<NavigationService>();
   final _spaceService = locator<AddSpaceService>();
+  final _snackbarService = locator<SnackbarService>();
   final _localStorageService = locator<LocalStorageService>();
   List<ExploreSpace> spaces = [];
   bool loading = false;
@@ -67,6 +67,7 @@ class DashViewModel extends FormViewModel {
     var user = jsonDecode(
         _localStorageService.getFromDisk(localAuthResponseKey).toString());
     log.i(user);
+    user = User.fromJson(user);
     var checkSpace = await _spaceService.checkSpace(space.id!, DateTime.now());
     if (checkSpace != null) {
       if (checkSpace.spaces.isNotEmpty && checkSpace.bookings.isEmpty) {
@@ -75,8 +76,35 @@ class DashViewModel extends FormViewModel {
             spaceId: space.id!,
             startStay: DateTime.now().toString(),
             endStay: DateTime.now().add(Duration(days: 1)).toString(),
-            paid: false,
-            appUserId: user.id));
+            appUserId: user.id!));
+        if (bookSpace != null) {
+               _snackbarService.showSnackbar(
+  message: 'Space successfully booked',
+  title: space.name,
+  duration: Duration(seconds: 3),
+  onTap: (_) {
+    print('snackbar tapped');
+  },
+);
+        } else {
+          _snackbarService.showSnackbar(
+  message: 'Could not book space',
+  title: 'Operation failed',
+  duration: Duration(seconds: 3),
+  onTap: (_) {
+    print('snackbar tapped');
+  },
+);
+        }
+      } else {
+            _snackbarService.showSnackbar(
+  message: 'You already have a booked space',
+  title: 'Operation failed',
+  duration: Duration(seconds: 3),
+  onTap: (_) {
+    print('snackbar tapped');
+  },
+);
       }
     }
     loading = false;

@@ -49,6 +49,8 @@ const useFakeApiService = false;
       presolveUsing: LocalStorageService.getInstance,
     ),
     LazySingleton(classType: NavigationService),
+    LazySingleton(classType: DialogService),
+    LazySingleton(classType: SnackbarService),
     LazySingleton(classType: AuthService),
     LazySingleton(classType: StartupService),
     LazySingleton(classType: AddSpaceService),

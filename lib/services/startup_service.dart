@@ -5,7 +5,7 @@ import 'package:hashnode_hasura_hackathon/services/auth_service.dart';
 import 'local_storage_service.dart';
 
 class StartupService {
-  final log = getLogger('OrganizationService');
+  final log = getLogger('GeneralService');
   final _localStorageService = locator<LocalStorageService>();
   bool _hasLoggedInUser = false;
   bool get hasLoggedInUser => _hasLoggedInUser;
